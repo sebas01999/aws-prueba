@@ -17,7 +17,7 @@ const swaggerSpec={
         },
         servers:[
             {
-                url:"http://54.173.83.127:3000"
+                url:"http://http://52.21.31.95:3000"
             },
         ],
     },
