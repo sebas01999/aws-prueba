@@ -4,7 +4,7 @@ const mongoose= require("mongoose")
 const cors= require('cors')
 const routes=require('./rutas')
 const path=require("path")
-
+const whitelist='http://3.233.65.9:3000'
 //swagger
 const swaggerUI=require("swagger-ui-express")
 const swaggerJsDoc=require("swagger-jsdoc")
@@ -33,7 +33,9 @@ mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb
 app.use(express.json())
 app.use('/api',routes)
 app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
-app.use(cors())
+app.use(cors({
+    origin : whitelist
+}))
 
 //rutas......
 
