@@ -35,7 +35,7 @@ mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb
 .catch((error) => console.error(error))
 
 app.use(express.json())
-app.use('/api',cors()),routes)
+app.use('/api',cors(),routes)
 app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 app.use(cors())
 
