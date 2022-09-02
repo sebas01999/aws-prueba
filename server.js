@@ -35,18 +35,15 @@ mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb
 .catch((error) => console.error(error))
 
 app.use(express.json())
-app.use('/api',cors(corsOptions),routes)
+app.use('/api',cors()),routes)
 app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
-app.use(cors({
-    origin: whitelist,
-    optionsSuccessStatus: 200
-}))
+app.use(cors())
 
 
 //rutas......
 
 
-app.get('/',cors(corsOptions),(req, res)=>{
+app.get('/',cors(),(req, res)=>{
     res.send('bienvenido a mi API')
 })
 
