@@ -29,7 +29,7 @@ const swaggerSpec={
 app.set('port', process.env.PORT || 3000);
 const corsOptionsDelegate = function (req, callback) {
     let corsOptions;
-    
+    console.log(req.header('Origin'))
     if (whitelist == req.header('Origin')) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
