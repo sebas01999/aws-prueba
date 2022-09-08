@@ -28,16 +28,17 @@ const swaggerSpec={
 
 app.set('port', process.env.PORT || 3000);
 const corsOptionsDelegate = function (req, callback) {
- 
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
     let corsOptions;
     
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+    if (whitelist.indexOf(req.header('Origin')) !== -1 || whitelistIp.indexOf(ip) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
         corsOptions = { origin: false } // disable CORS for this request
     }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
+        callback(null, corsOptions) // callback expects two parameters: error and options
+    }
 //conexion a mongodb
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error));
