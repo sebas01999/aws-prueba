@@ -35,6 +35,7 @@ const corsOptionsDelegate = function (req, callback) {
         console.log("listo")
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
+        console.log("asdasd")
         corsOptions = { origin: false } // disable CORS for this request
     }
     callback(null, corsOptions) // callback expects two parameters: error and options
