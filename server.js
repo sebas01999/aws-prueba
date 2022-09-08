@@ -1,7 +1,8 @@
 const express= require('express');
+const cors= require('cors')
 const app= express();
 const mongoose= require("mongoose")
-const cors= require('cors')
+
 const routes=require('./rutas')
 const path=require("path")
 const whitelist=['http://3.88.114.158:3000','http://localhost:3000' ]
