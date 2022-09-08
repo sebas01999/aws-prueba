@@ -30,8 +30,8 @@ app.set('port', process.env.PORT || 3000);
 const corsOptionsDelegate = function (req, callback) {
     let corsOptions;
     
-    console.log(req.connection.remoteAddress)
-  
+   
+    console.log(req.headers['x-forwarded-for'])
     if (whitelist == req.header('Origin')) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
