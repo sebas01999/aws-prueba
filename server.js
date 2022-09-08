@@ -6,8 +6,7 @@ const routes=require('./rutas')
 const path=require("path")
 const whitelist=['http://3.88.114.158:3000']
 var corsOptions = {
-    origin: whitelist,
-    optionsSuccessStatus: 200
+    origin: whitelist
   }
 //swagger
 const swaggerUI=require("swagger-ui-express")
@@ -36,7 +35,7 @@ mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb
 
 app.use(express.json())
 app.use('/api',cors(corsOptions),routes)
-app.use("/api-doc",cors(corsOptions), swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 app.use(cors({
     origin: 'http://3.88.114.158:3000'
 }))
