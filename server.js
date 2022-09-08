@@ -52,5 +52,5 @@ app.get('/',(req, res)=>{
 
 
 app.listen(app.get('port'), ()=>{
-    console.log('server corriendo por el puerto ', app.get('port'));
+    console.log('server corriendo por el puerto : ', app.get('port'));
 })
