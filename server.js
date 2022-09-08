@@ -32,10 +32,8 @@ const corsOptionsDelegate = function (req, callback) {
     console.log(req.header('Origin'))
     
     if (whitelist == req.header('Origin')) {
-        console.log("listo")
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
-        console.log("asdasd")
         corsOptions = { origin: false } // disable CORS for this request
     }
     callback(null, corsOptions) // callback expects two parameters: error and options
@@ -45,7 +43,7 @@ mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb
 .catch((error) => console.error(error));
 app.use(cors(corsOptionsDelegate));
 app.use(express.json());
-app.use('/api',routes);
+app.use('/api',cors(corsOptionsDelegate),routes);
 app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 
@@ -53,7 +51,7 @@ app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 //rutas......
 
 
-app.get('/',(req, res)=>{
+app.get('/',cors(corsOptionsDelegate),(req, res)=>{
     res.send('bienvenido a mi API');
 })
 
