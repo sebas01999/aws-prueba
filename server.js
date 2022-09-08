@@ -8,6 +8,7 @@ const path=require("path");
 const whitelist='http://ec2-3-88-114-158.compute-1.amazonaws.com';
 const corsOptions = {
 	origin: whitelist,
+    optionsSuccessStatus: 200
 };
 //swagger
 const swaggerUI=require("swagger-ui-express");
@@ -43,7 +44,7 @@ app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 //rutas......
 
 
-app.get('/',(req, res)=>{
+app.get('/',cors(corsOptions),(req, res)=>{
     res.send('bienvenido a mi API');
 })
 
