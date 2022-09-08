@@ -5,9 +5,9 @@ const mongoose= require("mongoose");
 
 const routes=require('./rutas');
 const path=require("path");
-const whitelist='http://3.88.114.158:3000';
+const whitelist='http://ec2-3-88-114-158.compute-1.amazonaws.com';
 const corsOptions = {
-	origin: whitelist
+	origin: whitelist,
 };
 //swagger
 const swaggerUI=require("swagger-ui-express");
