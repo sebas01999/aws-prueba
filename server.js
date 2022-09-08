@@ -28,11 +28,9 @@ const swaggerSpec={
 
 app.set('port', process.env.PORT || 3000);
 const corsOptionsDelegate = function (req, callback) {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    
     let corsOptions;
     
-    if (whitelist.indexOf(req.header('Origin')) !== -1 || whitelistIP.indexOf(ip) !== -1) {
+    if (whitelist == req.header('Origin')) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
         corsOptions = { origin: false } // disable CORS for this request
