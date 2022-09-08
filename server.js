@@ -1,4 +1,4 @@
-const express= require('express');
+const express= require('express')
 const cors= require('cors')
 const app= express();
 const mongoose= require("mongoose")
@@ -35,7 +35,6 @@ app.set('port', process.env.PORT || 3000);
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error))
 
-app.use(cors(corsOptions))
 app.use(express.json())
 app.use('/api',cors(corsOptions),routes)
 app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
