@@ -32,6 +32,7 @@ const corsOptionsDelegate = function (req, callback) {
     console.log(req.header('Origin'))
     
     if (whitelist == req.header('Origin')) {
+        console.log("listo")
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
         corsOptions = { origin: false } // disable CORS for this request
