@@ -7,8 +7,7 @@ const routes=require('./rutas');
 const path=require("path");
 const whitelist='http://3.88.114.158:3000';
 const corsOptions = {
-	origin: whitelist,
-	optionsSuccessStatus: 200
+	origin: whitelist
 };
 //swagger
 const swaggerUI=require("swagger-ui-express");
