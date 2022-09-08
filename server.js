@@ -33,9 +33,7 @@ app.set('port', process.env.PORT || 3000);
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error))
 
-app.use(cors({
-    origin: 'http://3.88.114.158:3000'
-}))
+
 app.use(express.json())
 app.use('/api',routes)
 app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
