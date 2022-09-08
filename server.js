@@ -6,7 +6,7 @@ const mongoose= require("mongoose");
 const routes=require('./rutas');
 const path=require("path");
 const whitelist='http://3.88.114.158:3000';
-
+const whitelistIP='3.88.114.158';
 //swagger
 const swaggerUI=require("swagger-ui-express");
 const swaggerJsDoc=require("swagger-jsdoc");
@@ -32,7 +32,7 @@ const corsOptionsDelegate = function (req, callback) {
     
     let corsOptions;
     
-    if (whitelist.indexOf(req.header('Origin')) !== -1 || whitelist.indexOf(ip) !== -1) {
+    if (whitelist.indexOf(req.header('Origin')) !== -1 || whitelistIP.indexOf(ip) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
         corsOptions = { origin: false } // disable CORS for this request
