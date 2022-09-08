@@ -4,7 +4,7 @@ const mongoose= require("mongoose")
 const cors= require('cors')
 const routes=require('./rutas')
 const path=require("path")
-const whitelist=['http://3.88.114.158:3000']
+const whitelist=['http://3.88.114.158:3000','http://localhost:3000' ]
 var corsOptions = {
     origin: whitelist
   }
@@ -33,17 +33,17 @@ app.set('port', process.env.PORT || 3000);
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error))
 
-
+app.use(cors(corsOptions))
 app.use(express.json())
-app.use('/api',routes)
-app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
+app.use('/api',cors(corsOptions),routes)
+app.use("/api-doc", cors(corsOptions),swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
 
 
 //rutas......
 
 
-app.get('/',(req, res)=>{
+app.get('/',cors(corsOptions),(req, res)=>{
     res.send('bienvenido a mi API')
 })
 
@@ -52,5 +52,5 @@ app.get('/',(req, res)=>{
 
 
 app.listen(app.get('port'), ()=>{
-    console.log('server corriendo por el puerto : ', app.get('port'));
+    console.log('server corriendo por el puerto ', app.get('port'));
 })
