@@ -6,10 +6,7 @@ const mongoose= require("mongoose");
 const routes=require('./rutas');
 const path=require("path");
 const whitelist='http://3.88.114.158:3000';
-const corsOptions = {
-	origin: whitelist,
-    optionsSuccessStatus: 200
-};
+
 //swagger
 const swaggerUI=require("swagger-ui-express");
 const swaggerJsDoc=require("swagger-jsdoc");
@@ -30,21 +27,18 @@ const swaggerSpec={
 };
 
 app.set('port', process.env.PORT || 3000);
-var corsOptionsDelegate = function (req, callback) {
-    const corsOptions = {
-        methods: ["GET", "PUT", "POST", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-        credentials: true
-    };
-  
-    const myIpAddress = req.connection.remoteAddress; // This is where you get the IP address from the request
-    if (whitelist.indexOf(myIpAddress) !== -1) {
-        corsOptions.origin = true
+const corsOptionsDelegate = function (req, callback) {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
+    let corsOptions;
+    
+    if (whitelist.indexOf(req.header('Origin')) !== -1 || whitelistIp.indexOf(ip) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
     } else {
-        corsOptions.origin = false
+        corsOptions = { origin: false } // disable CORS for this request
     }
-    callback(null, corsOptions);
-}
+        callback(null, corsOptions) // callback expects two parameters: error and options
+    }
 //conexion a mongodb
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error));
