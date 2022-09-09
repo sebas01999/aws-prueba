@@ -5,8 +5,11 @@ const mongoose= require("mongoose");
 
 const routes=require('./rutas');
 const path=require("path");
-const whitelist='http://3.88.114.158:3000';
-const whitelistIP='3.88.114.158:3000';
+const whitelist='http://54.82.187.78:3000';
+
+const confCors={
+    origin: whitelist
+}
 //swagger
 const swaggerUI=require("swagger-ui-express");
 const swaggerJsDoc=require("swagger-jsdoc");
@@ -27,27 +30,13 @@ const swaggerSpec={
 };
 
 app.set('port', process.env.PORT || 3000);
-const corsOptionsDelegate = function (req, callback) {
-    const corsOptions = {
-        methods: ["GET", "PUT", "POST", "DELETE", "HEAD", "PATCH"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-        credentials: true
-    };
-    console.log(req.header('Origin'))
-    
-    if (whitelist == req.header('Origin')) {
-        corsOptions.origin = true
-    } else {
-        corsOptions.origin = false
-    }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
+
 //conexion a mongodb
 mongoose.connect('mongodb+srv://sebastian1999:SG99201st@cluster0.1aem6ri.mongodb.net/?retryWrites=true&w=majority').then(() => console.log("Conectadooo")) // utilizamos la varibale ambiente .env
 .catch((error) => console.error(error));
-app.use(cors(corsOptionsDelegate));
+app.use(cors(confCors));
 app.use(express.json());
-app.use('/api',cors(corsOptionsDelegate),routes);
+app.use('/api',cors(confCors),routes);
 app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 
@@ -55,7 +44,7 @@ app.use("/api-doc",swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 //rutas......
 
 
-app.get('/',cors(corsOptionsDelegate),(req, res)=>{
+app.get('/',cors(confCors),(req, res)=>{
     res.send('bienvenido a mi API');
 })
 
